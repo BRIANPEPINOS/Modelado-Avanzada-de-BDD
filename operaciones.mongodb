@@ -4,7 +4,7 @@ db.productos.drop();
 
 db.productos.insertMany([
   {
-    nombre: "SmartX Pro 6",
+    nombre: "Samsung s21",
     sku: "SMX-P6-256BLK",
     precio: 799,
     stock: 25,
@@ -19,17 +19,17 @@ db.productos.insertMany([
     }
   },
   {
-    nombre: "NoteBook Z14",
+    nombre: "HP Nootebook",
     sku: "NBK-Z14-16-512",
     precio: 1199,
     stock: 8,
     tipo_producto: "Laptop",
     fecha_creacion: new Date(),
     especificaciones: {
-      cpu: "Intel Core i7-12700H",
+      cpu: "Intel Core i7",
       ram_gb: 16,
       almacenamiento_gb: 512,
-      gpu: "NVIDIA RTX 4050",
+      gpu: "NVIDIA ",
       dimensiones: { alto_cm: 2.0, ancho_cm: 35.0, peso_kg: 1.8 }
     }
   },
