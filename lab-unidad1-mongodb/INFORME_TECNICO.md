@@ -42,7 +42,7 @@ y todas las categorías y marcas deben tener al menos un producto asociado
 ###  Estructura general
 
 ```json
-// Colección: productos
+
 {
   "_id": "ObjectId(...)",
   "nombre": "String",
@@ -52,13 +52,13 @@ y todas las categorías y marcas deben tener al menos un producto asociado
   "tipo_producto": "String (Enum: 'Laptop', 'Smartphone', 'Monitor')",
   "fecha_creacion": "Date",
   "especificaciones": {
-    // Ejemplo Smartphone:
-    // "pantalla": "6.1\"",
-    // "ram_gb": 8,
-    // Ejemplo Laptop:
-    // "cpu": "Core i7",
-    // "ram_gb": 16,
-    // "dimensiones": { "alto_cm": 2.5, "ancho_cm": 35, "peso_kg": 1.8 }
+     Ejemplo Smartphone:
+     "pantalla": "6.1\"",
+     "ram_gb": 8,
+     Ejemplo Laptop:
+     "cpu": "Core i7",
+     "ram_gb": 16,
+     "dimensiones": { "alto_cm": 2.5, "ancho_cm": 35, "peso_kg": 1.8 }
   }
 }
 ```
@@ -131,25 +131,25 @@ Para realizar las diferentes consultas en base a los productos agregados recient
 
 ---
 ### Consulta 1:  Mostrar todos los productos en la colección
-```json
+```js
 // Consulta 1: Mostrar todos los productos
 
 db.productos.find();
 ```
 ###  Consulta 2: Mostrar solo los productos que sean de tipo "Laptop". 
-```json
+```js
 // Consulta 2: Solo productos tipo "Laptop"
 
 db.productos.find({ tipo_producto: "Laptop" });
 ```
 ###  Consulta 3: Mostrar los productos que tengan más de 10 unidades en stock Y un precio menor a 1000.
-```json
+```js
 // Consulta 3: Productos con stock > 10 Y precio < 1000
 
 db.productos.find({ stock: { $gt: 10 }, precio: { $lt: 1000 } });
 ```
 ###  Consulta 4: Mostrar solo el nombre, precio y stock de los "Smartphone" (Proyección)
-```json
+```js
 // Consulta 4: Proyección de nombre, precio y stock para "Smartphone"
 
 db.productos.find(
@@ -163,7 +163,7 @@ En esta seccion se actualizan ciertos datos de diferentes productos, para ello s
 
 ---
 ### Operación 1: Se vendió un Smartphone (busque uno por su sku). Reduzca su stock en 1 unidad. (Use $inc). 
-```json
+```js
 
 db.productos.updateOne(
   { sku: "SMX-P6-256BLK" },
@@ -171,7 +171,7 @@ db.productos.updateOne(
 );
 ```
 ### Operación 2: El precio de la Laptop ha subido. Actualice su precio a un nuevo valor y añada un nuevo campo ultima_revision: new Date(). (Use $set).
-```json
+```js
 
 db.productos.updateOne(
   { sku: "NBK-Z14-16-512" },
@@ -179,33 +179,57 @@ db.productos.updateOne(
 );
 ```
 #  **Fase 3: Resultados de la ejecución**
+En esta figura se observa la ejecución de los comandos use('techstore') y db.createCollection('productos'), los cuales 
+permiten crear y seleccionar la base de datos donde se almacenarán los documentos del proyecto. El mensaje "ok": 
+1 confirma que la colección fue creada correctamente.  
 
-**Figura 2.** Comandos para crear la base de datos”
+***Figura 2. Comandos para crear la base de datos*** 
 
 ![Comandos para crear la base de datos](./img/crearBD.png)
 
-**Figura 3.** Resultado y ejecución consulta 1:  Mostrar todos los productos en la colección.”
+Esta figura muestra el resultado de la primera consulta utilizando db.productos.find(), la cual recupera todos los 
+documentos almacenados en la colección productos. En el resultado se visualizan los tres registros insertados. 
+
+***Figura 3. esultado y ejecución consulta 1*** 
 
 ![Comandos para crear la base de datos](./img/consulta-productos.png)
 
-**Figura 4.** Resultado y ejecución consulta 2:   Mostrar solo los productos que sean de tipo "Laptop".”
+En esta consulta se utilizó el filtro { tipo_producto: "Laptop" } para mostrar únicamente los documentos que 
+corresponden a laptops dentro de la colección. El resultado devuelve un solo documento con todos los detalles de la 
+laptop. 
+
+***Figura 4.  Resultado y ejecución consulta 2***:  
 
 ![Comandos para crear la base de datos](./img/consulta2.png)
 
-**Figura 5.** Resultado y ejecución consulta 3: Mostrar los productos que tengan más de 10 unidades en stock Y un precio menor a 1000.”
+En este caso se aplicó un filtro compuesto utilizando los operadores lógicos $gt (mayor que) y $lt (menor que). La 
+consulta { stock: { $gt: 10 }, precio: { $lt: 1000 } } devuelve los productos que cumplen ambas condiciones, 
+mostrando únicamente el smartphone y el monitor. 
+
+***Figura 5. Resultado y ejecución consulta 3*** 
 
 ![Comandos para crear la base de datos](./img/consulta3.png)
 
-**Figura 6.** Resultado y ejecución consulta 4: Mostrar solo el nombre, precio y stock de los "Smartphone" (Proyección).”
+En la siguiente consulta se empleó una proyección para mostrar solo ciertos campos del documento: nombre, precio 
+y stock, ocultando el resto de los atributos. Esto se logró con la instrucción { _id: 0, nombre: 1, precio: 1, stock: 1 }. 
+
+***Figura 6.Resultado y ejecución consulta 4*** 
 
 ![Comandos para crear la base de datos](./img/consulta4.png)
 
-**Figura 7.** Resultado y ejecución operación 1: Se vendió un Smartphone (busque uno por su sku). Reduzca su stock en 1 unidad. (Use $inc). ”
+Esta operación simula la venta de un smartphone. Usando el operador $inc, se disminuyó en una unidad el valor del 
+campo stock. Al comparar el documento antes y después de la actualización, se puede observar que el stock pasó 
+de 25 a 24. 
+
+***Figura 7. Resultado y ejecución operación 1*** 
 
 ![Comandos para crear la base de datos](./img/operacion1.png)
 
-**Figura 8.** Resultado y ejecución operación 2 : El precio de la Laptop ha subido. Actualice su precio a un nuevo valor y añada un nuevo campo ultima_revision: 
-new Date(). (Use $set).”
+En esta última operación se utilizó el operador $set para modificar el precio de la laptop y agregar un nuevo campo 
+llamado ultima_revision con la fecha actual (new Date()). El resultado muestra cómo MongoDB permite actualizar o 
+añadir campos dentro de un documento ya existente
+
+***Figura 8. esultado y ejecución operación 2***
 
 ![Comandos para crear la base de datos](./img/operacion2.png)
 
