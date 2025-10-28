@@ -41,7 +41,7 @@ y todas las categorías y marcas deben tener al menos un producto asociado
 #  **Diseño del Modelo NoSQL (MongoDB):**
 ###  Estructura general
 
-```json
+```js
 
 {
   "_id": "ObjectId(...)",
@@ -52,10 +52,10 @@ y todas las categorías y marcas deben tener al menos un producto asociado
   "tipo_producto": "String (Enum: 'Laptop', 'Smartphone', 'Monitor')",
   "fecha_creacion": "Date",
   "especificaciones": {
-     Ejemplo Smartphone:
+     ejemplo_smartphone:
      "pantalla": "6.1\"",
      "ram_gb": 8,
-     Ejemplo Laptop:
+     ejemplo_Laptop:
      "cpu": "Core i7",
      "ram_gb": 16,
      "dimensiones": { "alto_cm": 2.5, "ancho_cm": 35, "peso_kg": 1.8 }
@@ -66,7 +66,7 @@ y todas las categorías y marcas deben tener al menos un producto asociado
 ## Preparación del Entorno
 Se añade los comandos para conectarse a la base de datos  y seleccionar la base de datos techstore,  
 ademas de un comando para borrar la colección productos al inicio, para asegurar que el script sea re-ejecutable.
-```json
+```js
 use('techstore');
 db.productos.drop();
 ```
@@ -75,7 +75,7 @@ db.productos.drop();
 ---
 ## Inserción de datos
 
-```json
+```js
 // Colección: productos
 db.productos.insertMany([
   {
