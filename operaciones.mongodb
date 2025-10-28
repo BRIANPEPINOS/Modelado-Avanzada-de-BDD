@@ -1,0 +1,50 @@
+use('techstore');
+db.productos.drop();
+
+
+db.productos.insertMany([
+  {
+    nombre: "SmartX Pro 6",
+    sku: "SMX-P6-256BLK",
+    precio: 799,
+    stock: 25,
+    tipo_producto: "Smartphone",
+    fecha_creacion: new Date(),
+    especificaciones: {
+      pantalla: '6.1" OLED',
+      ram_gb: 8,
+      almacenamiento_gb: 256,
+      so: "Android 14",
+      camaras_mp: { principal: 50, ultra_wide: 12, selfie: 12 }
+    }
+  },
+  {
+    nombre: "NoteBook Z14",
+    sku: "NBK-Z14-16-512",
+    precio: 1199,
+    stock: 8,
+    tipo_producto: "Laptop",
+    fecha_creacion: new Date(),
+    especificaciones: {
+      cpu: "Intel Core i7-12700H",
+      ram_gb: 16,
+      almacenamiento_gb: 512,
+      gpu: "NVIDIA RTX 4050",
+      dimensiones: { alto_cm: 2.0, ancho_cm: 35.0, peso_kg: 1.8 }
+    }
+  },
+  {
+    nombre: "VisionView Q27",
+    sku: "MON-Q27-144",
+    precio: 299,
+    stock: 45,
+    tipo_producto: "Monitor",
+    fecha_creacion: new Date(),
+    especificaciones: {
+      tamanio_pulg: 27,
+      resolucion: "2560x1440",
+      panel: "IPS",
+      frecuencia_hz: 144
+    }
+  }
+]);
