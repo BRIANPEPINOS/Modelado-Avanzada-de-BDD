@@ -13,7 +13,8 @@
 **Nombre completo:** TNTE Pepinós Arboleda Brian  
 **Asignatura:** Modelado avanzado de Base de Datos  
 **Fecha:** 04 noviembre del 2025  
-**Repositorio de github:** 
+**Repositorio de github:**
+https://github.com/BRIANPEPINOS/Modelado-Avanzada-de-BDD/tree/main/Proyecto 
 
 ##  1. Introducción
 
@@ -22,8 +23,20 @@ El presente informe corresponde al Avance 1 del proyecto TechStore, el cual tien
 La arquitectura propuesta combina un entorno SQL(relacional) y un entorno NoSQL (basado en documentos). De esta manera, se busca aprovechar las fortalezas de cada tecnología según el tipo de información. Como mencionan Coronel y Morris (2022), *“no existe una sola base de datos que resuelva todas las necesidades de información en una organización”*, por lo que los modelos híbridos se han vuelto comunes en entornos empresariales modernos.
 
 ---
-
-## 2. Validación de los productos
+## 2. Estructura del proyecto 
+```plaintext
+PROYECTO
+├── SISTEMA_NOSQL/
+│   ├── operaciones.mongodb
+│   └── validation.mongodb
+│
+├── SISTEMA_SQL/
+│   ├── Diagrama_entidad_relacion.png
+│   └── schema_ventas.sql
+│
+└── INFORME_U1.md
+```
+## 3. Validación de los productos
 ```js
 db.createCollection('productos', {
     validator: {
@@ -163,11 +176,9 @@ Por último, se identificó un cuarto problema relacionado con la actualización
 
 ## 4. Conclusiones
 
-La implementación de un modelo dual entre SQL y NoSQL en el proyecto *TechStore* permitió comprender cómo diferentes tipos de datos pueden coexistir en un mismo ecosistema empresarial. El modelo relacional asegura el control de las transacciones y la integridad referencial, mientras que el modelo NoSQL aporta flexibilidad para almacenar productos con atributos variables.  
+La implementación de un modelo dual entre SQL y NoSQL en el proyecto *TechStore* permitió comprender cómo diferentes tipos de datos pueden coexistir en un mismo ecosistema empresarial. El modelo relacional asegura el control de las transacciones, mientras que el modelo NoSQL aporta flexibilidad para almacenar productos con atributos variables.  
 
-Además, el análisis de calidad de datos permitió anticipar problemas comunes como la duplicidad de registros, las referencias inconsistentes y los errores en la información de contacto. Gracias a la aplicación de restricciones, validadores e índices únicos, se fortaleció la confiabilidad de los datos desde el origen.  
-
-En términos generales, este avance sentó las bases de una arquitectura de datos sólida, sobre la cual se podrán desarrollar los procesos de integración y análisis del sistema de inteligencia de negocios.
+Además, el análisis de calidad de datos permitió anticipar problemas comunes como la duplicidad de registros, las referencias inconsistentes. Gracias a la aplicación de restricciones, validadores e índices únicos, se fortaleció la confiabilidad de los datos desde el origen.  
 
 ---
 
