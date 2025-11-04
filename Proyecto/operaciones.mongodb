@@ -1,0 +1,87 @@
+use('techstore');
+db.productos.drop();
+
+
+db.productos.insertMany([
+  {
+    nombre: "Samsung s21",
+    sku: "SMX-P6-256BLK",
+    precio: 799,
+    stock: 25,
+    tipo_producto: "Smartphone",
+    fecha_creacion: new Date(),
+    especificaciones: {
+      pantalla: '6.1" OLED',
+      ram_gb: 8,
+      almacenamiento_gb: 256,
+      so: "Android 14",
+      camaras_mp: { principal: 50, ultra_wide: 12, selfie: 12 }
+    }
+  },
+  {
+    nombre: "HP Nootebook",
+    sku: "NBK-Z14-16-512",
+    precio: 1199,
+    stock: 8,
+    tipo_producto: "Laptop",
+    fecha_creacion: new Date(),
+    especificaciones: {
+      cpu: "Intel Core i7",
+      ram_gb: 16,
+      almacenamiento_gb: 512,
+      gpu: "NVIDIA ",
+      dimensiones: { alto_cm: 2.0, ancho_cm: 35.0, peso_kg: 1.8 }
+    }
+  },
+  {
+    nombre: "VisionView Q27",
+    sku: "MON-Q27-144",
+    precio: 299,
+    stock: 45,
+    tipo_producto: "Monitor",
+    fecha_creacion: new Date(),
+    especificaciones: {
+      tamanio_pulg: 27,
+      resolucion: "2560x1440",
+      panel: "IPS",
+      frecuencia_hz: 144
+    }
+  }
+]);
+
+
+// Consulta 1: Mostrar todos los productos
+
+db.productos.find();
+
+// Consulta 2: Solo productos tipo "Laptop"
+
+db.productos.find({ tipo_producto: "Laptop" });
+
+// Consulta 3: Productos con stock > 10 Y precio < 1000
+
+db.productos.find({ stock: { $gt: 10 }, precio: { $lt: 1000 } });
+
+// Consulta 4: Proyección de nombre, precio y stock para "Smartphone"
+
+db.productos.find(
+  { tipo_producto: "Smartphone" },
+  { _id: 0, nombre: 1, precio: 1, stock: 1 }
+);
+
+//ACTUALIZACION DE DATOS
+// Operación 1: Se vendió un Smartphone (busque uno por su sku). Reduzca su stock en 1 unidad. (Use $inc). 
+
+db.productos.updateOne(
+  { sku: "SMX-P6-256BLK" },
+  { $inc: { stock: -1 } }
+);
+
+// Operación 2: El precio de la Laptop ha subido. Actualice su precio a un nuevo valor y añada un nuevo campo ultima_revision: 
+//new Date(). (Use $set). 
+
+db.productos.updateOne(
+  { sku: "NBK-Z14-16-512" },
+  { $set: { precio: 1299, ultima_revision: new Date() } }
+);
+
