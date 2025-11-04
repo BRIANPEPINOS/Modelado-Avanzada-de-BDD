@@ -52,7 +52,10 @@ db.createCollection('productos', {
                     bsonType: 'object',
                     additionalProperties: true,
                     minProperties: 1
-                }
+                }, ultima_revision: {
+                    bsonType: ['date', 'null'],
+                
+                },
             }
         }
     },
