@@ -5,8 +5,8 @@ db.productos.drop();
 db.productos.insertMany([
   {
     nombre: "Samsung s21",
-    sku: "SMX-P6-256BLK",
-    precio: 799,
+    sku: "SM0021",
+    precio: 799.00,
     stock: 25,
     tipo_producto: "Smartphone",
     fecha_creacion: new Date(),
@@ -20,8 +20,8 @@ db.productos.insertMany([
   },
   {
     nombre: "HP Nootebook",
-    sku: "NBK-Z14-16-512",
-    precio: 1199,
+    sku: "HP7512",
+    precio: 1199.00,
     stock: 8,
     tipo_producto: "Laptop",
     fecha_creacion: new Date(),
@@ -35,8 +35,8 @@ db.productos.insertMany([
   },
   {
     nombre: "VisionView Q27",
-    sku: "MON-Q27-144",
-    precio: 299,
+    sku: "VV2744",
+    precio: 299.00,
     stock: 45,
     tipo_producto: "Monitor",
     fecha_creacion: new Date(),
@@ -73,7 +73,7 @@ db.productos.find(
 // Operación 1: Se vendió un Smartphone (busque uno por su sku). Reduzca su stock en 1 unidad. (Use $inc). 
 
 db.productos.updateOne(
-  { sku: "SMX-P6-256BLK" },
+  { sku: "VV2744" },
   { $inc: { stock: -1 } }
 );
 
@@ -81,7 +81,7 @@ db.productos.updateOne(
 //new Date(). (Use $set). 
 
 db.productos.updateOne(
-  { sku: "NBK-Z14-16-512" },
-  { $set: { precio: 1299, ultima_revision: new Date() } }
+  { sku: "HP7512" },
+  { $set: { precio: 1299.00, ultima_revision: new Date() } }
 );
 
