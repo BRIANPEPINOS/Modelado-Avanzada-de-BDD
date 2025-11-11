@@ -1,0 +1,65 @@
+use('gastro_app');
+
+//db.platos.drop();
+
+db.createCollection("platos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["nombre_plato", "precio", "id_categoria"],
+            additionalProperties: false,
+            properties: {
+                _id: {},
+                nombre_plato: { 
+                    bsonType: "string"
+                },
+                precio: {
+                    bsonType: "number",
+                    minimum: 0,
+                },
+                id_categoria: {
+                    bsonType: "number",
+                },
+                es_alcoholica: { 
+                    bsonType: "bool" 
+                },
+                tamano_ml: { 
+                    bsonType: "int",
+                    minimum: 350 
+                },
+                alergenos: { 
+                    bsonType: "array", 
+                    items: { bsonType: "string" } 
+                },
+                es_vegano: { 
+                    bsonType: "bool" 
+                }
+            }
+        }
+    }
+});
+
+
+db.platos.insertOne({
+  nombre_plato: "Cerveza Cusqueña",
+  precio: 3,
+  id_categoria: 3,          
+  es_alcoholica: true,
+  tamano_ml: 500
+});
+
+db.platos.insertOne({
+  nombre_plato: "Arroz con concha",
+  precio: 10,
+  id_categoria: 2,          
+  alergenos: ["peces", "moluscos","crustaceos"],
+  es_vegano:false
+});
+
+db.platos.insertOne({
+  nombre_plato: "Batido de mora",
+  precio: 2,
+  id_categoria: 3,          
+  es_alcoholica: false,
+  tamano_ml: 400
+});
