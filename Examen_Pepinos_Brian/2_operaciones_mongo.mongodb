@@ -10,7 +10,7 @@ db.createCollection("platos", {
             additionalProperties: false,
             properties: {
                 _id: {},
-                nombre_plato: { 
+                nombre_plato: {
                     bsonType: "string"
                 },
                 precio: {
@@ -20,19 +20,19 @@ db.createCollection("platos", {
                 id_categoria: {
                     bsonType: "number",
                 },
-                es_alcoholica: { 
-                    bsonType: "bool" 
+                es_alcoholica: {
+                    bsonType: "bool"
                 },
-                tamano_ml: { 
-                    bsonType: "int",
-                    minimum: 350 
+                tamano_ml: {
+                    bsonType: "number",
+                    minimum: 350
                 },
-                alergenos: { 
-                    bsonType: "array", 
-                    items: { bsonType: "string" } 
+                alergenos: {
+                    bsonType: "array",
+                    items: { bsonType: "string" }
                 },
-                es_vegano: { 
-                    bsonType: "bool" 
+                es_vegano: {
+                    bsonType: "bool"
                 }
             }
         }
@@ -41,25 +41,40 @@ db.createCollection("platos", {
 
 
 db.platos.insertOne({
-  nombre_plato: "Cerveza Cusqueña",
-  precio: 3,
-  id_categoria: 3,          
-  es_alcoholica: true,
-  tamano_ml: 500
+    nombre_plato: "Cerveza Cusqueña",
+    precio: 3.0,
+    id_categoria: 3,
+    es_alcoholica: true,
+    tamano_ml: 500
 });
 
 db.platos.insertOne({
-  nombre_plato: "Arroz con concha",
-  precio: 10,
-  id_categoria: 2,          
-  alergenos: ["peces", "moluscos","crustaceos"],
-  es_vegano:false
+    nombre_plato: "Arroz con concha",
+    precio: 10.0,
+    id_categoria: 2,
+    alergenos: ["peces", "moluscos", "crustaceos"],
+    es_vegano: false
 });
 
+
 db.platos.insertOne({
-  nombre_plato: "Batido de mora",
-  precio: 2,
-  id_categoria: 3,          
-  es_alcoholica: false,
-  tamano_ml: 400
+    nombre_plato: "Batido de mora",
+    precio: 2.0,
+    id_categoria: 3,
+    es_alcoholica: false,
+    tamano_ml: 400
 });
+
+db.platos.find()
+
+db.platos.updateMany(
+    { id_categoria: 3, es_alcoholica: true, tamano_ml: { $gte: 350 } },
+    { $inc: { precio: 0.5 } }
+);
+
+
+
+db.platos.find(
+    { es_alcoholica: { $exists: true }, precio: { $lt: 5 } },
+     { nombre_plato: 1, precio: 1, es_alcoholica: 1, tamano_ml: 1, _id: 0 }
+)
