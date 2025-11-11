@@ -11,7 +11,7 @@
 
 **Nombre completo:** TNTE Pepinós Arboleda Brian  
 **Asignatura:** Modelado avanzado de Base de Datos  
-**Fecha:** 11 de noviembre 2025  
+**Fecha:** 11 de noviembre del 2025  
 **Repositorio de github:** 
 
 https://github.com/BRIANPEPINOS/Modelado-Avanzada-de-BDD/tree/main/Examen_Pepinos_Brian
